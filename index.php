@@ -8,11 +8,11 @@ $HUM = file_get_contents('https://api.thingspeak.com/channels/509782/fields/2/la
 $TEM = file_get_contents('https://api.thingspeak.com/channels/509782/fields/1/last.txt');
 $events = json_decode($content, true);
  if ($HUM < 55) {
-        $humi = "รู้สึกผิวแห้ง ไม่สบายตัว"  ;;
+        $humi = "feling dry and uncomfortable skin"  ;;
     } elseif ( $HUM >= 55  && $HUM < 66) {
-        $humi = "รู้สึกเย็นกำลังสบาย";
+        $humi = "feeling cool";
     } else {
-       $humi = "รู้สึกร้อนอบอ้าว เหนียวตัว";
+       $humi = "feeling hot and sticky";
     }
 // Validate parsed JSON data
 if (!is_null($events['events'])) {
@@ -27,13 +27,14 @@ if (!is_null($events['events'])) {
 			// Build message to reply back
 			$messages = [
 				'type' => 'text',
-				'text' => "ไม่มีคำสั่งที่คุณพิมพ์ "."\n"."กรุณากรอกรหัสตามที่กำหนด หรือพิมพ์ [help] เพื่อดูเมนู"
+				'text' => "There are no commands that you type. "."\n"."Please enter the code as required or type [help] to view the menu."
 					// "text"
 			];
 			if (ereg_replace('[[:space:]]+', '', strtoupper($text)) == "HELP"){
 				$messages = [
 				'type' => 'text',
-				'text' => "โปรดกรอกรหัสตามที่กำหนด"."\n"."[A]เพื่อดูวิธีการใช้งาน"."\n"."[B]เพื่อดูคู่มือการเดินทาง"."\n"."[C]เพื่อดูแผนที่"."\n"."[D]เพื่อดูตารางการเดินทาง"."\n"."ตรวจสอบสภาพอากาศ"."\n"."[1]อำเภอเมือง"."\n"."[2]อำเภอนาโยง"."\n"."[3]อำเภอย่านตาขาว"."\n"."[4]อำเภอปะเหลียน"."\n"."[5]อำเภอหาดสำราญ"."\n"."[6]อำเภอกันตัง"."\n"."[7]อำเภอสิเกา"."\n"."[8]อำเภอวังวิเศษ"."\n"."[9]อำเภอห้วยยอด"."\n"."[10]อำเภอรัษฎา"
+				'text' => "Please enter the code as required."."\n"."[A] to see how to use"."\n"."[B] to view the travel guide"."\n"."[C] to view the map"."\n"."
+[D] to see the itinerary."."\n"."Check weather"."\n"."[1]Muang Trang District"."\n"."[2]Nayong District"."\n"."[3]Yantakhao District"."\n"."[4]Phalean District"."\n"."[5]Hadsumran District"."\n"."[6]Kuntang District"."\n"."[7]Sigao District"."\n"."[8]Wangwiset District"."\n"."[9]Huaiyot District"."\n"."[10]Rassada District"
 			];
 			}
 			if (ereg_replace('[[:space:]]+', '', strtoupper($text)) == "A"){
@@ -66,31 +67,32 @@ if (!is_null($events['events'])) {
 			if (ereg_replace('[[:space:]]+', '', trim($text)) == "1"){
 				$messages = [
 				'type' => 'text', 
-				'text' => "สถานที่ : " . "" .  "อำเภอเมือง"."\n"."อุณหภูมิ C : " . $TEM . "\n" . "ความชื้น : " . $humi . "\n" . "แสง : ". $Light ." lx" . "\n" . "[help] เพื่อดูเมนู"
+				'text' => "Place : " . "Muang Trang District" .  ""."\n"."Temperature C : " . $TEM . "\n" . "Humidity : " . $humi . "\n" . "Light : ". $Light ." lx" . "\n" . "
+[help] to view the menu"
 			];
 			}
 			if (ereg_replace('[[:space:]]+', '', trim($text)) == "2"){
 				$messages = [
 				'type' => 'text', 
-				'text' => "สถานที่ : " . "" .  "อำเภอนาโยง"."\n"."อุณหภูมิ C : " . $TEM . "\n" . "ความชื้น : " . $humi . "\n" . "แสง : ". $Light ." lx" . "\n" . "[help] เพื่อดูเมนู"
+				'text' => "Place : " . "" .  "Nayong District"."\n"." Temperature C : " . $TEM . "\n" . "Humidity : " . $humi . "\n" . "Light: ". $Light ." lx" . "\n" . "[help] to view the menu"
 			];
 			}
 			if (ereg_replace('[[:space:]]+', '', trim($text)) == "3"){
 				$messages = [
 				'type' => 'text', 
-				'text' => "สถานที่ : " . "" .  "อำเภอย่านตาขาว"."\n"."อุณหภูมิ C : " . $TEM . "\n" . "ความชื้น : " . $humi . "\n" . "แสง : ". $Light ." lx" . "\n" . "[help] เพื่อดูเมนู"
+				'text' => " Place: " . "" .  "Yantakhao District"."\n"."Temperature C : " . $TEM . "\n" . "Humidity : " . $humi . "\n" . "Light : ". $Light ." lx" . "\n" . "[help] to view the menu"
 			];
 			}
 			if (ereg_replace('[[:space:]]+', '', trim($text)) == "4"){
 				$messages = [
 				'type' => 'text', 
-				'text' => "สถานที่ : " . "" .  "อำเภอปะเหลียน"."\n"."อุณหภูมิ C : " . $TEM . "\n" . "ความชื้น : " . $humi . "\n" . "แสง : ". $Light ." lx" . "\n" . "[help] เพื่อดูเมนู"
+				'text' => "Place : " . "" .  "Phalean District"."\n"."Temperature C : " . $TEM . "\n" . "Humidity : " . $humi . "\n" . "Light : ". $Light ." lx" . "\n" . "[help] to view the menu"
 			];
 			}
 			if (ereg_replace('[[:space:]]+', '', trim($text)) == "5"){
 				$messages = [
 				'type' => 'text', 
-				'text' => "สถานที่ : " . "" .  "อำเภอหาดสำราญ"."\n"."อุณหภูมิ C : " . $TEM . "\n" . "ความชื้น : " . $humi . "\n" . "แสง : ". $Light ." lx" . "\n" . "[help] เพื่อดูเมนู"
+				'text' => "Place : " . "" .  "Hadsumran District"."\n"."Temperature  C : " . $TEM . "\n" . "Humidity : " . $humi . "\n" . "Light : ". $Light ." lx" . "\n" . "[help] to view the menu"
 			];
 			}
 			if (ereg_replace('[[:space:]]+', '', trim($text)) == "6"){
